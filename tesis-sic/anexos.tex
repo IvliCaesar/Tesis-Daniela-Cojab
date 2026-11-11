@@ -1,0 +1,275 @@
+\capitulo{ANEXOS DEL CAPÍTULO III}
+
+\seccion{Anexo A. Construcción de los universos en Bloomberg}
+
+La construcción de los tres universos se realizó con la herramienta de búsqueda de valores de la terminal, aplicando cuatro criterios en cascada. La Tabla A.1 presenta la configuración de cada universo y el Anexo B detalla los campos solicitados.
+
+\tabla{A.1}{Criterios de selección aplicados a cada universo}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3009}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3582}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1506}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1904}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Criterio}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Segmento global (SIC)}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Segmento local}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Universo de liquidez}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Estado operativo & Los catorce disponibles & Los catorce & Los catorce \\
+Bolsas & México, BIVA y Bolsa Mexicana de Valores & Las mismas & Las mismas \\
+País o región de domicilio del emisor & Distinto de México & México & México \\
+Tipos de valor & Catorce tipos & Catorce tipos & Siete tipos de capital \\
+\end{longtable}
+}
+
+\emph{Nota.} Elaboración propia a partir de la configuración empleada en la terminal.
+
+\textbf{Estados operativos incluidos.} Adquirido, activo, no inscrito, vencido, interrumpido, inactivo, liquidado, cotización pendiente, símbolo pendiente, pospuesto, no cotiza, suspendido, cambio de código y al emitirse. La inclusión de los catorce responde al tratamiento del sesgo de supervivencia descrito en el apartado 3.2.2.
+
+\textbf{Tipos de valor incluidos en los universos de operatividad.} Certificados, fondo cerrado, capital ordinario, preferente convertible, fondos cotizados, sociedad en comandita, certificados de participación, preferencia, acciones preferentes, fideicomiso de bienes raíces, recibos, fideicomiso real, valores que siguen acciones y unidad. La amplitud busca que la suma de los dos segmentos represente al mercado accionario completo.
+
+\textbf{Tipos de valor incluidos en el universo de liquidez.} Capital ordinario, unidad, certificados de participación, preferente convertible, preferencia, acciones preferentes y otro. Quedan excluidos los fondos cotizados, los fideicomisos de bienes raíces, los fondos cerrados y los recibos de depósito, cuya naturaleza económica no es comparable con la de una acción de empresa.
+
+\textbf{Procedimiento de consulta histórica.} La herramienta devuelve los valores que cumplen los criterios a una fecha determinada. Para obtener un universo que comprenda también los instrumentos deslistados durante el periodo, la consulta se repitió con fecha de corte al 1 de enero de cada ejercicio, de 2004 a 2026, más una consulta adicional al 30 de septiembre de 2026. Los veinticuatro listados se unieron eliminando los valores repetidos, y esa unión constituye el universo de cada segmento. Por construcción, la unión resulta mayor que el listado de cualquier corte individual.
+
+\textbf{Identificación de los instrumentos.} Cada valor se identifica con su clave de pizarra seguida del sufijo del centro de negociación y del tipo de instrumento. La Tabla A.2 presenta los tres sufijos empleados.
+
+\tabla{A.2}{Sufijos de centro de negociación}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.0803}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3340}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Sufijo}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Centro de negociación}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Etiqueta del filtro en la terminal}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+MM & Mercado mexicano consolidado, que comprende ambas bolsas & México \\
+MF & Bolsa Mexicana de Valores & Bolsa Mexicana de Valores \\
+MU & Bolsa Institucional de Valores & BIVA \\
+\end{longtable}
+}
+
+\emph{Nota.} Elaboración propia. La forma completa del identificador es la clave de pizarra, seguida del sufijo y del tipo de instrumento, por ejemplo \texttt{GMEXICOB\ MF\ }\texttt{Equity}.
+
+Solicitar los tres para un mismo valor permite descomponer su operación por centro de ejecución. La serie principal se construye con la suma de los dos últimos y el primero se conserva como referencia de consistencia interna, de modo que la comparación entre ambas construcciones se reporta y se cuantifica en el capítulo IV sin que se exija igualdad exacta entre ellas.
+
+\textbf{Parámetros de la consulta histórica.} Son los mismos para los tres universos.
+
+\tabla{A.3}{Parámetros de extracción}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2794}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3250}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3956}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Parámetro}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Configuración}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Razón}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Intervalo de fechas & 1 de enero de 2004 a 30 de septiembre de 2026 & Periodo de estudio \\
+Periodicidad & Diaria & Mayor frecuencia disponible para todos los campos \\
+Tratamiento de observaciones ausentes & En blanco, sin arrastrar el último valor & Distinguir sesión sin información de sesión sin negociación \\
+Calendario de alineación & Cinco días hábiles por semana & Excluir fines de semana \\
+Normalización & Ninguna & Conservar las magnitudes originales \\
+Divisa & Pesos mexicanos & Hacer sumables los dos segmentos \\
+Fuente de precio & Predeterminada de la terminal & No introducir una selección adicional \\
+Parámetros de dividendos & Los de la terminal & Consistencia con la definición del índice de rendimiento total \\
+Tipo de cotización & Rendimiento & Convención de la herramienta \\
+Cálculo de cotización & Fin de periodo & Corresponder al cierre de la sesión \\
+\end{longtable}
+}
+
+\emph{Nota.} El calendario seleccionado excluye fines de semana pero no los días festivos del mercado mexicano, circunstancia atendida mediante el procedimiento descrito en el apartado 3.2.3 y validada contra el calendario normativo de cierre obligatorio conforme al apartado 3.5.
+
+\textbf{Disposición de la tabla exportada.} Las series se exportaron con una fila por fecha en orden descendente, conservando en los encabezados el identificador del valor, el nombre del campo, su nemónico y las fechas inicial y final de la consulta. Los archivos exportados no se editan de forma manual.
+
+\seccion{Anexo B. Campos solicitados y sus definiciones}
+
+\tabla{B.1}{Campos de la consulta histórica}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1616}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3959}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3307}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1118}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Campo}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Código}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Qué proporciona}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Universos}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Importe operado & PR093, TURNOVER & Monto total operado en la divisa del valor, igual a la suma de los precios de cada operación multiplicados por el número de títulos correspondiente & Los tres \\
+Volumen & PR013, PX\_VOLUME & Número total de títulos negociados en la sesión & Los tres \\
+Precio de cierre & PR005, PX\_LAST & Último precio proporcionado por la bolsa & Los tres \\
+Postura de compra & PR002, PX\_BID & Precio máximo que un inversionista está dispuesto a pagar & Liquidez \\
+Postura de venta & PR004, PX\_ASK & Precio mínimo al que un intermediario acepta vender & Liquidez \\
+Precio máximo & PR007, PX\_HIGH & Precio máximo alcanzado durante la sesión & Liquidez \\
+Precio mínimo & PR008, PX\_LOW & Precio mínimo alcanzado durante la sesión & Liquidez \\
+Capitalización de mercado & RR902, CUR\_MKT\_CAP & Valor de mercado de las acciones en circulación de la empresa & Liquidez \\
+Acciones en circulación & DS124, EQY\_SH\_OUT & Número total de acciones en circulación & Liquidez \\
+Índice de rendimiento total & RT116, TOT\_RETURN\_INDEX\_GROSS\_DVDS & Índice de rendimiento total con dividendos brutos & Liquidez \\
+\end{longtable}
+}
+
+\emph{Nota.} Elaboración propia con las definiciones de campo de la terminal.
+
+\tabla{B.2}{Definición del campo y comportamiento observado en la extracción}
+
+Conviene distinguir dos cosas que no coinciden. La columna central reproduce lo que la documentación de la terminal establece sobre el campo, que describe su comportamiento como dato en vivo. La columna derecha reporta lo que efectivamente devolvió la consulta histórica de esta investigación, realizada con relleno en blanco, que es el parámetro que gobierna la serie descargada.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2021}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2804}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5174}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Campo}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Definición de la terminal ante la ausencia de operación}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Comportamiento observado en la extracción}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Importe operado & No contempla arrastre & Ausente en las sesiones sin negociación \\
+Volumen & Indica el número de títulos del último día negociado & Ausente: de 228,961 sesiones vigentes sin importe operado, 228,948 presentan también el volumen vacío y las 13 restantes registran volumen positivo sin importe asociado \\
+Precio de cierre & Se rellena si la bolsa lo proporcionó en los últimos treinta días de operación & Poblado en el 20.0\% de las sesiones vigentes sin importe operado \\
+Posturas de compra y venta & Muestran las de la última sesión cuando el mercado está cerrado & Poblado en el 45.5\% de esas sesiones \\
+Precios máximo y mínimo & Muestran los de la última sesión cuando el mercado está cerrado & Poblado en el 20.0\% de esas sesiones \\
+Capitalización y acciones en circulación & Se publican con independencia de la operación & Poblados con independencia de la operación \\
+Índice de rendimiento total & Índice de rendimiento total con dividendos brutos & Ausente en las sesiones sin operación entre 2004 y 2018, y poblado con el valor previo entre el 55.5\% y el 66.9\% de ellas a partir de 2019 \\
+\end{longtable}
+}
+
+\emph{Nota.} Elaboración propia. La columna derecha corresponde a las observaciones del universo de liquidez dentro del periodo de vigencia de cada instrumento.
+
+Esta tabla sustenta la regla expuesta en el apartado 3.2.3. El importe operado y el volumen resultan ausentes de forma conjunta, mientras que los campos de precio y posturas regresan poblados entre el 20\% y el 45\% de las sesiones sin operación, de modo que emplear un campo de precio para establecer si hubo negociación clasificaría como operadas un número considerable de sesiones en las que no la hubo.
+
+Debe señalarse que ambos campos proceden del mismo proveedor, de modo que su coincidencia constituye evidencia de consistencia interna y no una validación independiente de cobertura. Esa limitación se declara en el apartado 3.6.
+
+\tabla{B.3}{Series de mercado solicitadas}
+
+Además de las series por instrumento, la investigación emplea series agregadas de mercado y macroeconómicas. Las obtenidas de la terminal se solicitaron con los mismos parámetros de la Tabla A.3 y el campo de último precio, con excepción de la señalada.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1755}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3002}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5243}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Identificador}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Serie}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Uso en la investigación}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+MEXBOL Index & Índice de Precios y Cotizaciones & Rendimiento y volatilidad del mercado local; modelo de mercado para la volatilidad idiosincrática \\
+VIX Index & Índice de volatilidad implícita del mercado estadounidense & Incertidumbre financiera internacional \\
+MXIBTIIE Index & Tasa de Interés Interbancaria de Equilibrio a 28 días & Tasa de referencia \\
+GCETAA28 Index & Rendimiento de Cetes a 28 días & Tasa real, al descontar la inflación \\
+GMXN10YR Index & Bono gubernamental mexicano a 10 años & Condiciones financieras de largo plazo \\
+USGG10YR Index & Bono gubernamental estadounidense a 10 años & Diferencial frente al bono mexicano \\
+MXN BGN Curncy & Tipo de cambio peso por dólar & Entorno cambiario \\
+NAFTRAC MM Equity & Fondo cotizado que replica el IPC & Prueba de robustez que excluye el instrumento de mayor peso del segmento local; se solicita con el campo de importe operado \\
+\end{longtable}
+}
+
+\emph{Nota.} Elaboración propia. El índice nacional de precios al consumidor es la serie MXCPI de la terminal \corregido{decía ``procede del Banco de México; el cálculo reproducido usa MXCPI, que coincide con el apartado 3.2.1} y el producto interno bruto real del Sistema de Cuentas Nacionales del INEGI, conforme al apartado 3.2.1, y no se obtienen de la terminal.
+
+\textbf{Consideraciones adicionales sobre tres campos.}
+
+El campo de capitalización de mercado corresponde, para las empresas con más de una clase de acción ordinaria, al total de la empresa. La rotación se construye en consecuencia sumando el importe operado de todas las series elegibles de la empresa y dividiéndolo entre esa capitalización tomada una sola vez, conforme al apartado 3.3.2. La comprobación de consistencia del campo entre clases y la regla aplicada cuando discrepan se describen en ese mismo apartado; lo que se conserva como limitación en el apartado 3.6 es la posibilidad de que la cobertura de las series elegibles sea incompleta.
+
+El campo de acciones en circulación excluye las acciones de tesorería únicamente en los países que la propia fuente enumera, entre los cuales no figura México. La cifra correspondiente a emisoras mexicanas puede por tanto incluirlas.
+
+El índice de rendimiento total se emplea para calcular el rendimiento diario porque incorpora los dividendos y viene ajustado por movimientos de capital, de modo que una división accionaria no se registra como una variación de precio. Como contrapartida, un dividendo puede modificar el índice en una sesión en que el precio no cambió; la magnitud de ese efecto es mínima: de 465,306 sesiones operadas de las series principales con rendimiento medible, en 553 (0.12\%) el precio no cambia y el índice sí; la proporción de rendimientos cero es 15.60\% con el índice y 15.66\% con el precio \corregido{decía que la cifra se reporta en el capítulo IV, donde no aparece; calculada con los datos de la autora}.
+
+\seccion{Anexo C. Procedimiento de cálculo}
+
+El instrumento de esta investigación no es un cuestionario sino un procedimiento de cálculo documentado, desarrollado en lenguaje Python y organizado en módulos que se ejecutan en secuencia. Cada módulo recibe archivos de entrada, aplica un conjunto de transformaciones y produce tablas y figuras que constituyen la base del capítulo de resultados.
+
+\tabla{C.1}{Módulos del procedimiento}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1397}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2006}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4597}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Módulo}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Entrada}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Proceso}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Salida}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1. Lectura & Archivos exportados de la terminal y series externas & Unificación en una base única por instrumento, bolsa, fecha y campo; identificación del calendario de sesiones & Base diaria sin depurar \\
+2. Depuración & Base diaria sin depurar & Reglas del apartado 3.2.3, vinculación de series a su emisora y delimitación de la vigencia de cada instrumento & Base diaria depurada \\
+3. Medidas & Base diaria depurada & Cálculo de las ecuaciones 1 a 10, con la regla de muestra que corresponde a cada indicador & Series de mercado y paneles mensual y anual por emisora \\
+4. Primera hipótesis & Series de mercado & Tendencia, Mann y Kendall, raíz unitaria, Bai y Perron, pruebas de Chow y tasas de crecimiento por tramo & Tablas y figuras del apartado 4.3 \\
+5. Segunda hipótesis & Paneles por emisora & Medianas con remuestreo, Mann y Kendall por tramo, Wilcoxon pareado, Mann y Whitney y corrección de Holm & Tablas y figuras del apartado 4.4 \\
+6. Tercera hipótesis & Paneles y series de mercado & Panel con efectos fijos, errores de Driscoll y Kraay, participación rezagada, estimación por tercil y modelos anidados & Tablas y figuras del apartado 4.5 \\
+7. Validación & Todas las anteriores & Comprobaciones del apartado 3.5, entre ellas el contraste del calendario de sesiones contra el calendario normativo de cierre obligatorio, y pruebas de robustez & Tablas del apartado 4.1 y 4.5.6 \\
+\end{longtable}
+}
+
+\emph{Nota.} Elaboración propia.
+
+\textbf{Trazabilidad y reproducibilidad.} Los archivos exportados de la terminal se conservan sin modificación y separados de las bases procesadas, de modo que toda transformación quede registrada en el código y pueda repetirse. El procedimiento incorpora verificaciones internas que detienen la ejecución cuando una tabla intermedia no cumple las condiciones esperadas. Tres de ellas son obligatorias antes de cualquier agregación. La primera comprueba que la combinación de identificador, fecha y centro de negociación sea única, de modo que la agregación no pueda ejecutarse si subsisten registros duplicados sin conciliar. La segunda contrasta el importe construido como suma de ambos centros de ejecución con el consolidado que publica la misma fuente, identifica y cuantifica las discrepancias y genera un reporte de conciliación, sin exigir igualdad exacta entre las dos construcciones, porque las discrepancias documentadas en 2018 y 2019 impiden tratar la igualdad como condición de validez, de modo que la verificación registra la diferencia en lugar de detener el cálculo. La tercera comprueba que el número de observaciones corresponda al esperado tras cada filtro. Cada corrida registra los parámetros empleados, de modo que los resultados sean reproducibles a partir de los mismos archivos de entrada.
+
+\textbf{Orden de las decisiones.} La investigación distingue tres momentos. Los criterios de construcción de los universos y las reglas de depuración se fijaron antes de calcular cualquier indicador, a partir de la literatura metodológica citada en el apartado 3.2.3. La definición de los indicadores y de sus reglas de muestra se estableció después, durante el examen de las propiedades de los datos descrito en el apartado 3.5, y algunas de esas reglas se modificaron a raíz de lo observado, como ocurrió con la identificación de las sesiones sin operación mediante el importe operado, con la definición del calendario de sesiones y con la exclusión de los estimadores indirectos del diferencial. Las especificaciones econométricas y los criterios de lectura de las hipótesis se definieron al final, sobre indicadores ya construidos.
+
+Esta cronología se declara de forma expresa porque implica que el diseño no es preregistrado. Las pruebas de robustez del apartado 3.5 se aplicaron sobre especificaciones ya definidas y sus resultados se reportan con independencia de si respaldan o no las hipótesis planteadas.

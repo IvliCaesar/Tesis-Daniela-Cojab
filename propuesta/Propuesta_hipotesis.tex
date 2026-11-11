@@ -1,0 +1,122 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage{mathptmx}
+\usepackage[letterpaper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[stretch=10,shrink=10]{microtype}
+\usepackage{hyperref}
+\definecolor{upblue}{RGB}{17,68,135}
+\hypersetup{colorlinks=true,linkcolor=upblue,urlcolor=upblue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\emergencystretch=3em
+\setlist{itemsep=2pt,topsep=3pt}
+\makeatletter\newcommand{\tablainput}[1]{\@@input #1.tex }\makeatother
+\newcommand{\PSIC}{\mathit{PSIC}}
+\newtcolorbox{decision}{colback=orange!6,colframe=orange!70!black,boxrule=0.5pt,arc=1pt,breakable,
+  fontupper=\small,before upper={\textbf{Decisión de la dirección.}\ }}
+\newtcolorbox{texto}{colback=upblue!4,colframe=upblue!60,boxrule=0.5pt,arc=1pt,breakable,
+  fontupper=\small,before upper={\textbf{Texto propuesto para la tesis.}\ }}
+\input{../notas-de-clase/resultados}
+
+\title{Propuesta de reformulación de las hipótesis\\[2pt]
+\large Tesis de Daniela Cojab Mizrahi: ``La transformación del mercado accionario mexicano del mercado local al SIC entre 2004 y 2026''}
+\author{Para la dirección: Laura Jiménez Casillas y Julio César Galindo López}
+\date{9 de noviembre de 2026}
+
+\begin{document}
+\maketitle
+
+\textbf{Propósito.} La revisión de la versión del 6 de noviembre y las notas de clase concluyen que las tres hipótesis, tal como están escritas, no tienen una regla de rechazo que los datos puedan aplicar, o se contrastan con un procedimiento que la propia tesis declara inválido. Este documento propone una redacción para cada una, la prueba con la que se contrasta, el resultado con los datos de la autora y el texto que sustituiría a los apartados 4.3.4, 4.4.4, 4.5.4 y 5.1. Las cifras vienen de \texttt{scripts/notas\_analisis.py} y \texttt{scripts/verifica\_h3.py}, corridos sobre los archivos de la autora; ninguna está tecleada a mano. Cada sección termina con la decisión que corresponde a la dirección.
+
+\begin{tcolorbox}[colback=green!5,colframe=green!45!black,boxrule=0.5pt,arc=1pt]\small
+\textbf{Decisiones tomadas el 9 de noviembre de 2026 y aplicadas en la versión de cierre de la tesis} (\texttt{scripts/cierre\_tesis.py}): se elimina la hipótesis general como hipótesis y se enuncia como hecho; se adoptan H1a, H1b, H2a, H2b y la H3 reformulada; la Tabla 4.20 sustituye a la 4.10 como prueba de tamaño; la Tabla 4.21 sustituye a la 4.13 como prueba de H3 (la 4.13 queda como descriptiva); se adopta la conclusión conjunta; la identificación con variación entre emisoras queda como trabajo futuro. Se reescribieron 1.5, el criterio de 3.4.3, 4.3.4, 4.4.4, 4.5.4, 4.6, 5.1 y los resultados del resumen y del abstract.
+\end{tcolorbox}
+
+\textbf{Ya aplicado, sin decisión pendiente.} En la versión \texttt{.tex} de la tesis se corrigieron las dos discrepancias verificadas con el panel de la autora: ``cuatrocientas setenta y tres'' pasa a ``cuatrocientas ochenta'' en el resumen, el abstract, la Tabla 4.19 y el apartado 5.1.3 (la razón reestimada es 481); y el valor $p$ del diferencial en la Tabla 4.11 pasa de 0.349 a 0.387, como en las Tablas 4.15 a 4.17 (reestimado: 0.385). Ambas eran errores de transcripción, no de cálculo.
+
+\section{Hipótesis general}
+\textbf{Actual.} ``La operatividad del mercado accionario mexicano se ha modificado hacia el Sistema Internacional de Cotizaciones entre 2004 y 2026.''
+
+\textbf{Problema.} Es el dato que motiva la tesis; no puede resultar falsa.
+
+\textbf{Propuesta.} Eliminarla como hipótesis y enunciarla como hecho en el planteamiento del problema, con la participación de 2004 y de 2020 y la advertencia sobre la convención de conteo de 2004 (\RamibCorregido\% con convención homogénea).
+
+\begin{decision}Eliminar la hipótesis general, o conservarla explícitamente como hecho descriptivo.\end{decision}
+
+\section{H1: participación y crecimiento}
+\textbf{Actual.} ``El SIC ha ganado participación \ldots{} creciendo a mayor velocidad que el segmento local, el cual se contrajo frente a la economía mexicana.''
+
+\textbf{Problemas.} Tres afirmaciones en una; la tercera se mide con tasas entre extremos que dependen de 2004; la tendencia se prueba con un estadístico inválido bajo raíz unitaria.
+
+\textbf{Propuesta.}
+\begin{description}[leftmargin=1.2em]
+\item[H1a.] La participación del SIC en el importe operado aumentó entre 2004 y 2026. \emph{Prueba:} hecho descriptivo, más la deriva de $\operatorname{logit}(\PSIC_t)$ en diferencias con errores de Newey--West. \emph{Resultado:} deriva positiva (\RderivaAnual\ por año), no significativa ($p=\RpDeriva$); la más clara en 2014--2018 ($p=\RpDerivaB$).
+\item[H1b.] La razón entre el importe local real y el PIB real disminuyó desde su máximo. \emph{Prueba:} la razón y su pendiente desde el máximo. \emph{Resultado:} índice 2004 = 100; \RratioDosMilTrece\ en 2013 y \RratioDosMilVeinticuatro\ en 2024. Se cumple.
+\end{description}
+
+\begin{texto}
+La participación del Sistema Internacional de Cotizaciones pasó de 3.13\% en 2004 a 45.83\% en 2026, con un máximo de 55.91\% en 2020. La serie no permite distinguir una tendencia determinista de una caminata aleatoria con deriva: la deriva estimada es positiva pero no significativa, y la evidencia más clara corresponde a 2014--2018, después de la apertura del SIC a cualquier inversionista en enero de 2014. El segmento local, medido como importe operado real sobre PIB real, se expandió hasta 2013 y desde entonces perdió la mitad de ese nivel. La primera hipótesis se sostiene en su versión reformulada: la participación aumentó y el segmento local se contrajo frente a la economía desde su máximo.
+\end{texto}
+
+\begin{decision}Adoptar H1a y H1b. Decidir si la Tabla 4.6 se conserva (con pendientes además de extremos) o se sustituye por la razón al PIB.\end{decision}
+
+\section{H2: liquidez y tamaño}
+\textbf{Actual.} ``La liquidez \ldots{} ha disminuido entre 2004 y 2026, y ese cambio afectó principalmente a las emisoras pequeñas y medianas.''
+
+\textbf{Problemas.} Supone un deterioro monótono que los datos no muestran; la prueba de tamaño se hizo en la ventana 2004--2013 a 2019--2025, que no es la del deterioro.
+
+\textbf{Propuesta.}
+\begin{description}[leftmargin=1.2em]
+\item[H2a.] La liquidez de las emisoras mexicanas se deterioró después de 2014--2018. \emph{Prueba:} Wilcoxon pareado entre 2014--2018 y 2019--2025, y tendencia dentro del último tramo. \emph{Resultado (Tabla 4.9 de la tesis, reproducida):} deterioro significativo en Amihud y rotación; tendencias de deterioro en los cuatro indicadores dentro de 2019--2025.
+\item[H2b.] Ese deterioro fue mayor en las emisoras de menor tamaño. \emph{Prueba:} Mann--Whitney del cambio entre 2014--2018 y 2019--2025, tercil menor e intermedio contra mayor, Holm sobre ocho pruebas.
+\end{description}
+
+\begin{center}\small
+\begin{tabular}{@{}llcrrr@{}}\toprule
+Indicador & Grupo & $n$ (grupo / mayor) & Cambio grupo & Cambio mayor & $p$ Holm\\\midrule
+\tablainput{../notas-de-clase/tabla_tamano}
+\bottomrule\end{tabular}
+\end{center}
+
+\begin{texto}
+Después del tramo 2014--2018, la liquidez de las emisoras mexicanas se deterioró: la iliquidez de Amihud aumentó y la rotación disminuyó de manera significativa, y los cuatro indicadores muestran tendencias de deterioro dentro de 2019--2025. El cambio fue de mayor magnitud en las emisoras de menor capitalización en Amihud, rendimientos cero y rotación, pero con entre 25 y 43 empresas por grupo ninguna diferencia es significativa después de corregir por comparaciones múltiples. La evidencia no permite afirmar ni descartar que el deterioro afectara más a las emisoras pequeñas.
+\end{texto}
+
+\begin{decision}Adoptar H2a y H2b, y sustituir la Tabla 4.10 por la de la ventana 2014--2018 a 2019--2025. Decidir si se añade el panel con efectos de mes por tercil (más potencia) o se deja como trabajo futuro.\end{decision}
+
+\section{H3: contribución del SIC frente a otros factores}
+\textbf{Actual.} ``El SIC contribuye de manera limitada a explicar los cambios en la liquidez \ldots: su contribución es menor que la de los otros factores financieros y macroeconómicos considerados.''
+
+\textbf{Problemas.} La comparación se hace con $R^2$ intragrupo en niveles (inválida con raíz unitaria según el propio criterio de la tesis); enfrenta una variable con un bloque de seis que incluye un control construido con los mismos rendimientos; la razón depende del orden de entrada (con la participación primero, la razón de Amihud baja de 15 a 3.7).
+
+\textbf{Propuesta.} H3: \emph{En primeras diferencias, la contribución de Shapley--Owen de la participación del SIC a la varianza mensual de cada indicador es menor que la del factor común más importante.} Regla de rechazo: el intervalo por remuestreo de bloques de la diferencia $\phi_{\PSIC}-\max_k\phi_k$ excluye el cero por arriba.
+
+\begin{center}\small
+\begin{tabular}{@{}lrrcccrr@{}}\toprule
+Indicador & $R^2$ & $\phi_{\PSIC}$ & IC 95\% & Lugar & Diferencia & $\hat\beta_{\PSIC}$ & $p$\\\midrule
+\tablainput{../notas-de-clase/tabla_h3}
+\bottomrule\end{tabular}
+\end{center}
+
+\begin{texto}
+En primeras diferencias, la participación del Sistema Internacional de Cotizaciones explica menos de un tercio de punto porcentual de la varianza mensual de los cuatro indicadores y ocupa el último o el penúltimo lugar entre seis factores comunes; su coeficiente no es significativo en ninguno. Para el diferencial cotizado y la proporción de rendimientos cero, su contribución es significativamente menor que la del factor común más importante, de modo que la tercera hipótesis se sostiene. Para la iliquidez de Amihud y la rotación, los factores comunes también explican poco y los datos no permiten ordenarlos. En el panel de empresas, la asociación con los rendimientos cero se concentra en las emisoras del tercil menor, el único indicio de heterogeneidad por tamaño en la relación con el SIC.
+\end{texto}
+
+\begin{decision}Adoptar la H3 reformulada y retirar la Tabla 4.13 como prueba de la hipótesis (puede quedar como descriptiva, con los dos órdenes de entrada). Decidir si la tesis incorpora un diseño de identificación (por ejemplo, emisoras del IPC contra las demás) o lo deja como trabajo futuro.\end{decision}
+
+\section{Capítulo V: conclusión conjunta propuesta}
+\begin{texto}
+La participación del segmento internacional aumentó de forma sustancial entre 2004 y 2026, con su mayor avance después de la apertura del SIC al público en 2014 y un máximo en 2020--2021, cuando coincidieron la ampliación de los márgenes de operación del SIC en la BMV y la triplicación de cuentas de personas físicas en casas de bolsa. El segmento local creció más que la economía hasta 2013 y se contrajo frente a ella después. La liquidez de las emisoras mexicanas mejoró hasta mediados de la década de 2010 y se deterioró desde entonces. La participación del SIC acompaña a esos movimientos en los niveles, pero en los cambios mensuales su contribución es pequeña frente a la de los factores financieros comunes. Con un único regresor agregado, la investigación documenta co-movimiento y no efectos; separar el papel del SIC de la apertura, del impuesto a las ganancias de capital de 2014 y del auge minorista requiere variación entre emisoras en su exposición al segmento internacional.
+\end{texto}
+
+\begin{decision}Aprobar la conclusión conjunta, o pedir a la autora una versión propia con los mismos elementos.\end{decision}
+
+\end{document}

@@ -1,0 +1,10 @@
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.docx
+*.xlsx
+*.parquet
+__pycache__/
